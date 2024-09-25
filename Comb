@@ -1,24 +1,5 @@
+#I DID COMB
 
-#non_existent:P
-#11:16 AM (4 minutes ago)
-#to me
-
-def bubble_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
-    return arr
-
-def selection_sort(arr):
-    for i in range(len(arr)):
-        min_idx = i
-        for j in range(i+1, len(arr)):
-            if arr[j] < arr[min_idx]:
-                min_idx = j
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]
-    return arr
 
 def comb_sort(arr):
     gap = len(arr)
@@ -37,56 +18,4 @@ def comb_sort(arr):
             i += 1
     return arr
 
-def cycle_sort(arr):
-    writes = 0
-    for cycle_start in range(0, len(arr) - 1):
-        item = arr[cycle_start]
-        pos = cycle_start
-        for i in range(cycle_start + 1, len(arr)):
-            if arr[i] < item:
-                pos += 1
-        if pos == cycle_start:
-            continue
-        while item == arr[pos]:
-            pos += 1
-        arr[pos], item = item, arr[pos]
-        writes += 1
-        while pos != cycle_start:
-            pos = cycle_start
-            for i in range(cycle_start + 1, len(arr)):
-                if arr[i] < item:
-                    pos += 1
-            while item == arr[pos]:
-                pos += 1
-            arr[pos], item = item, arr[pos]
-            writes += 1
-    return arr
 
-# Function to handle user input and sorting choice
-def main():
-    print("Choose a sorting algorithm:")
-    print("1. Comb Sort")
-    print("2. Bubble Sort")
-    print("3. Selection Sort")
-    print("4. Cycle Sort")
-    choice = int(input("Enter your choice (1/2/3/4): "))
-
-    numbers = input("Enter a list of numbers separated by spaces: ")
-    arr = [int(num) for num in numbers.split()]
-
-    if choice == 1:
-        sorted_arr = comb_sort(arr)
-    elif choice == 2:
-        sorted_arr = bubble_sort(arr)
-    elif choice == 3:
-        sorted_arr = selection_sort(arr)
-    elif choice == 4:
-        sorted_arr = cycle_sort(arr)
-    else:
-        print("Invalid choice.")
-        return
-
-    print("Sorted array:", sorted_arr)
-
-if __name__ == "__main__":
-    main()
