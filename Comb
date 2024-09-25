@@ -1,5 +1,13 @@
 #I DID COMB
 
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
 
 def comb_sort(arr):
     gap = len(arr)
@@ -18,4 +26,23 @@ def comb_sort(arr):
             i += 1
     return arr
 
+def selection_sort():
+    answer = input("Would you like a random generated list or would you like to create your own 5 digit list. (enter: own/random)")
+    if answer == "own":
+        for i in range(5):
+            list = int(input("Enter the digit"))
 
+
+def cycle_sort(arr):    
+    writes = 0
+    
+    
+def main():
+    print("Choose a sorting algorithm.")
+    print("bubble sort (1)")
+    print("comb sort (2)")
+    print("selection sort(3)")
+    print("cycle sort(4)")
+    if user_
+
+    
