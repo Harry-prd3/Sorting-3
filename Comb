@@ -1,5 +1,5 @@
-#I DID COMB
 
+import random
 def bubble_sort(arr):
     n = len(arr)
     for i in range(n):
@@ -37,12 +37,4 @@ def cycle_sort(arr):
     writes = 0
     
     
-def main():
-    print("Choose a sorting algorithm.")
-    print("bubble sort (1)")
-    print("comb sort (2)")
-    print("selection sort(3)")
-    print("cycle sort(4)")
-    if user_
-
     
