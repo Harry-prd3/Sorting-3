@@ -26,18 +26,27 @@ def cycle_sort(array):
     writes = 0
     compare = 0
 
+    # loop through the array to find cycles to rotate
     for cycleStart in range(0, len(array) -1):
         item = array[cycleStart]
 
+        #check every element to see if it is lower, not already sorted then write and print
         pos = cycleStart
         for i in range(cycleStart + 1, len(array)):
             compare += 1
             if array[i] > pos:
                 pos += 1
+        temp = array[pos]
+        array[pos] = item
+        item = temp
+        print(array)
+
         
+        #if if the final position is the same then leave the element
         if pos == cycleStart:
             continue
         
+        #if there are element with the same value move the current one to the end of those elements and place it. print
         while item == array[pos]:
             pos += 1
             array[pos], item = item, array[pos]
@@ -47,13 +56,17 @@ def cycle_sort(array):
         while pos != cycleStart:
             
             pos = cycleStart
-            
+            #check every element to see if it is lower, not already sorted then write and print
             for i in range(cycleStart + 1, len(array)):
                 compare += 1
                 if array[i] > pos:
                     pos += 1
-        
-        
+            temp = array[pos]
+            array[pos] = item
+            item = temp
+            print(array)
+
+            #if there are element with the same value move the current one to the end of those elements and place it. print
             while item == array[pos]:
                 pos += 1
                 array[pos], item = item, array[pos]
@@ -89,12 +102,16 @@ def start():
     choice = int(input("Enter your choice (1/2/3/4): "))
     choice2= input("Would you like a random generated list or would you like to create your own 5 digit list. (enter: own/random)")
     if choice2 == 'own':
-        numbers = input("Enter a list of numbers separated by spaces: ")
+        arr = []
+        for i in range(5):
+            pass #copy off of suri
+        #numbers = input("Enter a list of numbers separated by spaces: ")
+        #numbers = int(numbers)
+        #arr = numbers.split()
     elif choice2 == 'random':
         [arr] = random.sample(range(1,100, 5))
     else:
         print("Invalid")
-    arr = [int(num) for num in numbers.split()]
 
     if choice == 1:
         sorted_arr = comb_sort(arr)
