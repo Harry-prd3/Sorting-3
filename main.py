@@ -1,6 +1,9 @@
 import random
-def comb_sort(arr):
-    gap = len(arr)
+def comb_sort(array):
+    writes = 0
+    compare = 0
+    
+    gap = len(array)
     shrink = 1.3
     sorted = False
 
@@ -10,17 +13,55 @@ def comb_sort(arr):
             gap = 1
             sorted = True
 
-        for i in range(len(arr) - gap):
-            if arr[i] > arr[i + gap]:
-                arr[i], arr[i + gap] = arr[i + gap], arr[i]
+        for i in range(len(array) - gap):
+            compare += 1
+            if array[i] > array[i + gap]:
+                writes +=1
+                array[i], array[i + gap] = array[i + gap], array[i]
                 sorted = False
+                print(array)
+            i += 1
+    print(f"number of comparisons: {compare}")
+    print(f"number of writes(swaps): {writes}")
+    return array
 
-def selection_sort():
-    answer = input("Would you like a random generated list or would you like to create your own 5 digit list. (enter: own/random)")
+def create_list(array):
+    answer = input("Would you like a randomly generated list or would you like to create your own 5? (enter: own/random) ")
     if answer == "own":
+        array = []
         for i in range(5):
-            list = int(input("Enter the digit"))
+            num = int(input("Enter the digit: "))
+            array.append(num)
+        print("Your list is: ", array)
+        return array
+    elif answer == "random":
+        array = []
+        for i in range(5):
+            array.append(random.randint(0, 50))
+        print("Your list is: ", array)
+    else:
+        print("That's not a valid option. Must be 'own' or 'random'. Please run it again and enter a valid option.")
+                
+    writes = 0
+    compare = 0
 
+    for i in range(len(array)):
+        min_index = i
+        for j in range(i+1, len(array)):
+            compare += 1
+            if array[j] < array[min_index]:
+                min_index = j
+        writes += 1
+        array[i], array[min_index] = array[min_index], array[i]
+    
+    print(f"number of comparisons: {compare}")
+    print(f"number of writes(swaps): {writes}")
+
+    if array:
+        sorted_array = create_list(array)
+        print("Sorted list is:", sorted_array)
+    return array
+    
 
 def cycle_sort(array):    
     writes = 0
@@ -34,11 +75,12 @@ def cycle_sort(array):
         pos = cycleStart
         for i in range(cycleStart + 1, len(array)):
             compare += 1
-            if array[i] > pos:
+            if array[i] < item:
                 pos += 1
         temp = array[pos]
         array[pos] = item
         item = temp
+        writes += 1
         print(array)
 
         
@@ -59,11 +101,12 @@ def cycle_sort(array):
             #check every element to see if it is lower, not already sorted then write and print
             for i in range(cycleStart + 1, len(array)):
                 compare += 1
-                if array[i] > pos:
+                if array[i] < item:
                     pos += 1
             temp = array[pos]
             array[pos] = item
             item = temp
+            writes += 1
             print(array)
 
             #if there are element with the same value move the current one to the end of those elements and place it. print
@@ -73,24 +116,26 @@ def cycle_sort(array):
                 writes += 1
                 print(array)
     
+    print(f"number of comparisons: {compare}")
+    print(f"number of writes(swaps): {writes}")
+    return(array)
+        
+        
+
+def bubble_sort(array):
+    writes = 0
+    compare = 0
     n = len(array)
-
-    print("After sort : ")
-    for i in range(0, n) : 
-        print(array[i], end = ' ')
-    
-    print("number of comparisons: " + compare)
-    print("number of writes(swaps): " + writes)
-        
-        
-
-def bubble_sort(arr):
-    n = len(arr)
     for i in range(n):
         for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
-    return arr
+            compare += 1
+            if array[j] > array[j+1]:
+                array[j], array[j+1] = array[j+1], array[j]
+                writes += 1
+                print(array)
+    print(f"number of comparisons: {compare}")
+    print(f"number of writes(swaps): {writes}")
+    return array
 
 
 def start():
@@ -100,33 +145,52 @@ def start():
     print("3. Selection Sort")
     print("4. Cycle Sort")
     choice = int(input("Enter your choice (1/2/3/4): "))
-    choice2= input("Would you like a random generated list or would you like to create your own 5 digit list. (enter: own/random)")
-    if choice2 == 'own':
-        arr = []
-        for i in range(5):
-            pass #copy off of suri
-        #numbers = input("Enter a list of numbers separated by spaces: ")
-        #numbers = int(numbers)
-        #arr = numbers.split()
-    elif choice2 == 'random':
-        [arr] = random.sample(range(1,100, 5))
-    else:
-        print("Invalid")
+    
 
     if choice == 1:
-        sorted_arr = comb_sort(arr)
+    
+        question = input("Do you want to add your own numbers or random number? (own/random)")
+        if question == 'own':
+            numbers = input("Enter a list of numbers separated by spaces: ")
+            array = [int(num) for num in numbers.split()]
+        elif question == 'random':
+            length = int(input("how long would you like the array?: "))
+            array = random.sample(range(1,100),length)
+            print(array)
+        else:
+            print("invalid input")
+        sorted_array = comb_sort(array)
     elif choice == 2:
-        sorted_arr = bubble_sort(arr)
+        
+        question = input("Do you want to add your own numbers or random number? (own/random)")
+        if question == 'own':
+            numbers = input("Enter a list of numbers separated by spaces: ")
+            array = [int(num) for num in numbers.split()]
+        elif question == 'random':
+            length = int(input("how long would you like the array?: "))
+            array = random.sample(range(1,100),length)
+            print(array)
+        else:
+            print("invalid input")
+        sorted_array = bubble_sort(array)
     elif choice == 3:
-        sorted_arr = selection_sort(arr)
+        sorted_array = create_list()
     elif choice == 4:
-        sorted_arr = cycle_sort(arr)
+        
+        question = input("Do you want to add your own numbers or random number? (own/random)")
+        if question == 'own':
+            numbers = input("Enter a list of numbers separated by spaces: ")
+            array = [int(num) for num in numbers.split()]
+            
+        elif question == 'random':
+            length = int(input("how long would you like the array?: "))
+            array = random.sample(range(1,100),length)
+            print(array)
+        else:
+            print("invalid input")
+        sorted_array = cycle_sort(array)
     else:
         print("Invalid choice.")
         return
-
-    print("Sorted array:", sorted_arr)
-
-
 
 start()
