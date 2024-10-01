@@ -25,7 +25,7 @@ def comb_sort(array):
     print(f"number of writes(swaps): {writes}")
     return array
 
-def create_list(array):
+def create_list():
     answer = input("Would you like a randomly generated list or would you like to create your own 5? (enter: own/random) ")
     if answer == "own":
         array = []
@@ -53,13 +53,12 @@ def create_list(array):
                 min_index = j
         writes += 1
         array[i], array[min_index] = array[min_index], array[i]
+        print(array)
     
     print(f"number of comparisons: {compare}")
     print(f"number of writes(swaps): {writes}")
 
-    if array:
-        sorted_array = create_list(array)
-        print("Sorted list is:", sorted_array)
+    
     return array
     
 
@@ -153,6 +152,7 @@ def start():
         if question == 'own':
             numbers = input("Enter a list of numbers separated by spaces: ")
             array = [int(num) for num in numbers.split()]
+            
         elif question == 'random':
             length = int(input("how long would you like the array?: "))
             array = random.sample(range(1,100),length)
@@ -166,6 +166,7 @@ def start():
         if question == 'own':
             numbers = input("Enter a list of numbers separated by spaces: ")
             array = [int(num) for num in numbers.split()]
+            
         elif question == 'random':
             length = int(input("how long would you like the array?: "))
             array = random.sample(range(1,100),length)
